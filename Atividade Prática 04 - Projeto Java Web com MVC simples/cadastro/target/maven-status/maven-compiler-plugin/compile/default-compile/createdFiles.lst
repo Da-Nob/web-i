@@ -1,0 +1,6 @@
+com\example\cadastro\ApplicationConfig.class
+com\example\cadastro\model\UsuarioService.class
+com\example\cadastro\resources\RestResource.class
+com\example\cadastro\resources\HelloRecord.class
+com\example\cadastro\model\Usuario.class
+com\example\cadastro\servlets\UsuarioServlet.class
