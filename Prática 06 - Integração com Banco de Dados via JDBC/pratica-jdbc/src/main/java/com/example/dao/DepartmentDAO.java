@@ -3,6 +3,7 @@ package com.example.dao;
 import java.util.List;
 import com.example.entities.Department;
 
+
 public interface DepartmentDAO {
     void insert(Department department);
     void update(Department department);
