@@ -14,16 +14,16 @@ import com.example.entities.Seller;
 
 public class Main {
     public static void main(String[] args) {
-        // String url = "jdbc:postgresql://localhost:5432/loja_jdbc";
-        // String usuario = "postgres";
-        // String senha = "1234";
+        String url = "jdbc:postgresql://localhost:5432/loja_jdbc";
+        String usuario = "postgres";
+        String senha = "1234";
 
-        // try (Connection conn = DriverManager.getConnection(url, usuario, senha)) {
-        //     System.out.println("Conectado com sucesso");
-        // } catch (SQLException e) {
-        //     System.err.println("Erro ao conectar ao banco de dados: ");
-        //     e.printStackTrace();
-        // } 
+        try (Connection conn = DriverManager.getConnection(url, usuario, senha)) {
+            System.out.println("Conectado com sucesso");
+        } catch (SQLException e) {
+            System.err.println("Erro ao conectar ao banco de dados: ");
+            e.printStackTrace();
+        } 
 
         // Department d1 = new Department(1, "Vendas");
         // Seller s1 = new Seller(1, "Joao Silva", "joaosilva@email.com", LocalDate.of(1990, 5, 15), 5000.0, d1);
@@ -38,7 +38,7 @@ public class Main {
         // Teste de inserção de departamento
         // Passamos null para o ID, pois ele será gerado automaticamente pelo banco de
         // dados
-        Department newDepartment = new Department(null, "Recursos Humanos");
+        Department newDepartment = new Department(null, "");
         departmentDAO.insert(newDepartment);
 
         // Teste de consulta de departamentos
@@ -50,7 +50,7 @@ public class Main {
         }
 
         // Teste de inserção de vendedor
-        Seller newSeller = new Seller(null, "Joaquim Filomeno", "joaquim.filomeno@example.com",
+        Seller newSeller = new Seller(null, "Julio Soares", "julio.soares@example.com",
                 LocalDate.parse("1998-09-04"), 5000.0, departments.getLast()); 
         sellerDAO.insert(newSeller);
 

@@ -92,7 +92,7 @@ public class DepartmentDAOImpl implements DepartmentDAO{
     @Override
     public void insert(Department department) {
         
-        String sql = "INSERT INTO department ?";
+        String sql = "INSERT INTO department (name) VALUES (?)";
 
         try (PreparedStatement pst = conn.prepareStatement(sql)) {
 
