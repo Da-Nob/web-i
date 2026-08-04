@@ -38,4 +38,36 @@ public class Instrutor {
     return cursos;
   }
 
+  public void setNome(String nome) {
+    this.nome = nome;
+}
+
+public void setEmail(String email) {
+    this.email = email;
+}
+
+public void setBiografia(String biografia) {
+    this.biografia = biografia;
+}
+
+public String getNome() {
+    return nome;
+}
+
+public String getEmail() {
+    return email;
+}
+
+public String getBiografia() {
+    return biografia;
+}
+
+
+
+ 
+
+
+
+
+
 }
