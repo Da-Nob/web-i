@@ -29,6 +29,86 @@ public class Curso {
   @Column(name = "carga_horaria", nullable = false)
   private Double cargaHoraria;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
+
+  public Double getCargaHoraria() {
+    return cargaHoraria;
+  }
+
+  public void setCargaHoraria(Double cargaHoraria) {
+    this.cargaHoraria = cargaHoraria;
+  }
+
+  public Double getPreco() {
+    return preco;
+  }
+
+  public void setPreco(Double preco) {
+    this.preco = preco;
+  }
+
+  public String getNivel() {
+    return nivel;
+  }
+
+  public void setNivel(String nivel) {
+    this.nivel = nivel;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public Instrutor getInstrutor() {
+    return instrutor;
+  }
+
+  public void setInstrutor(Instrutor instrutor) {
+    this.instrutor = instrutor;
+  }
+
+  public List<Aula> getAulas() {
+    return aulas;
+  }
+
+  public void setAulas(List<Aula> aulas) {
+    this.aulas = aulas;
+  }
+
   @Column(name = "preco", nullable = false)
   private Double preco;
 

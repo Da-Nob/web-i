@@ -29,6 +29,20 @@ public class Instrutor {
   @OneToMany(mappedBy = "instrutor")
   private List<Curso> cursos = new ArrayList<>();
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public void setCursos(List<Curso> cursos) {
+    this.cursos = cursos;
+  }
+
+
+
   public Instrutor() {
   }
 
