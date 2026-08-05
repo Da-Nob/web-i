@@ -177,7 +177,7 @@ Com esta prática foi possível compreender:
 
 Esta prática foi desenvolvida com base na série de artigos disponibilizada para a disciplina de Programação Web I:
 
-* [Série de artigos sobre ORM/JPA - Programação Web I](https://www.oracle.com/br/technical-resources/articles/dsl/crud-rest-sb2-hibernate.html?utm_source=chatgpt.com)
+* [Série de artigos sobre ORM/JPA - Programação Web I](https://github.com/lucas-lfm/pweb1-2026.1-base/tree/main/materiais/artigos-roteiros/orm-jpa)
 
 Os artigos apresentam a configuração do ambiente, o mapeamento de entidades, relacionamentos, utilização do `EntityManager`, implementação de DAOs e operações de persistência utilizando JPA e Hibernate.
 
