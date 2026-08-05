@@ -1,108 +1,133 @@
 package com.daniel;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.daniel.dao.AulaDaoImpl;
+import com.daniel.dao.CursoDaoImpl;
+import com.daniel.dao.InstrutorDaoImpl;
+import com.daniel.db.DBFactory;
 import com.daniel.entities.Aula;
 import com.daniel.entities.Curso;
 import com.daniel.entities.Instrutor;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-
 public class Main {
+
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("cursosPU");
-        EntityManager em = emf.createEntityManager();
 
-        // // Criando uma nova instância da entidade Instrutor
-        // Instrutor instrutor = new Instrutor();
-        // instrutor.setNome("João Silva");
-        // instrutor.setEmail("joao.silva@example.com");
-        // instrutor.setBiografia("Especialista em Java e desenvolvimento web.");
+        InstrutorDaoImpl instrutorDAO = new InstrutorDaoImpl();
+        CursoDaoImpl cursoDAO = new CursoDaoImpl();
+        AulaDaoImpl aulaDAO = new AulaDaoImpl();
 
-        // // Iniciando uma transação
-        // em.getTransaction().begin();
+        // ==========================
+        // INSTRUTOR
+        // ==========================
 
-        // // Persistindo a entidade
-        // em.persist(instrutor);
+        Instrutor instrutor = new Instrutor();
+        instrutor.setNome("Carlos Eduardo");
+        instrutor.setEmail("carlos.eduardo@example.com");
+        instrutor.setBiografia("Especialista em Java.");
 
-        // instrutor.setEmail("silva.joao@example.com"); // Alterando o email do instrutor antes de confirmar a transação
+        instrutorDAO.salvar(instrutor);
 
-        // // Confirmando a transação
-        // em.getTransaction().commit();
+        Optional<Instrutor> instrutorEncontrado =
+                instrutorDAO.buscarPorId(instrutor.getId());
 
-        // Suponha que você tenha uma entidade Instrutor desanexada (detached)
-        Instrutor instrutorDetached = new Instrutor();
-        instrutorDetached.setId(1L); // ID da entidade que você deseja atualizar
-        instrutorDetached.setNome("Maria da Silva");
-        instrutorDetached.setEmail("maria.silva@example.com");
+        instrutorEncontrado.ifPresent(i ->
+                System.out.println("Instrutor: " + i.getNome()));
 
-        em.getTransaction().begin(); // Iniciando uma transação
+        // ==========================
+        // CURSO
+        // ==========================
 
-        // Chamando merge() para atualizar a entidade
-        Instrutor instrutorAtualizado = em.merge(instrutorDetached);
+        Curso curso = new Curso();
+        curso.setTitulo("Java Avançado");
+        curso.setDescricao("Curso completo de Java");
+        curso.setCargaHoraria(40.0);
+        curso.setPreco(399.90);
+        curso.setNivel("Avançado");
+        curso.setStatus("Ativo");
+        curso.setUrl("https://curso.com/java");
+        curso.setInstrutor(instrutor);
 
-        em.getTransaction().commit();
+        cursoDAO.salvar(curso);
 
-        // Buscando uma entidade Instrutor pelo ID
-        Instrutor instrutorEncontrado = em.find(Instrutor.class, 1L); // Substitua 1L pelo ID do instrutor que deseja buscar
-        if (instrutorEncontrado != null) {
-            System.out.println("Instrutor encontrado: " + instrutorEncontrado.getNome());
-        } else {
-            System.out.println("Instrutor não encontrado.");
-        }
+        Optional<Curso> cursoEncontrado =
+                cursoDAO.buscarPorId(curso.getId());
 
+        cursoEncontrado.ifPresent(c ->
+                System.out.println("Curso: " + c.getTitulo()));
 
-        try {
-    em.getTransaction().begin();
+        // ==========================
+        // AULA 1
+        // ==========================
 
-    // Buscando o instrutor que será associado ao curso
-    Instrutor instrutorEncontrado1 = em.find(Instrutor.class, 1L);
+        Aula aula1 = new Aula();
+        aula1.setTitulo("Introdução");
+        aula1.setDescricao("Primeira aula");
+        aula1.setDuracaoMinutos(30);
+        aula1.setOrdem(1);
+        aula1.setUrlVideo("https://video1.com");
+        aula1.setCurso(curso);
 
-    // Criando uma nova instância da entidade Curso
-    Curso curso = new Curso();
-    curso.setTitulo("Java Avançado");
-    curso.setDescricao("Curso avançado de Java para desenvolvedores experientes.");
-    curso.setCargaHoraria(40.0);
-    curso.setPreco(499.99);
-    curso.setNivel("Avançado");
-    curso.setUrl("https://www.example.com/java-avancado");
-    curso.setStatus("Ativo");
-    // Supondo que instrutorEncontrado seja uma entidade Instrutor previamente buscada
-    curso.setInstrutor(instrutorEncontrado1);
+        aulaDAO.salvar(aula1);
 
-    // Persistindo o curso
-    em.persist(curso);
+        // ==========================
+        // AULA 2
+        // ==========================
 
-    // Criando e persistindo aulas associadas ao curso
-    Aula aula1 = new Aula();
-    aula1.setTitulo("Aula 1 - Introdução ao Java Avançado");
-    aula1.setDescricao("Nesta aula, vamos explorar conceitos avançados de Java.");
-    aula1.setDuracaoMinutos(30);
-    aula1.setOrdem(1);
-    aula1.setUrlVideo("https://www.example.com/java-avancado/aula1");
-    aula1.setCurso(curso);
+        Aula aula2 = new Aula();
+        aula2.setTitulo("POO");
+        aula2.setDescricao("Programação Orientada a Objetos");
+        aula2.setDuracaoMinutos(45);
+        aula2.setOrdem(2);
+        aula2.setUrlVideo("https://video2.com");
+        aula2.setCurso(curso);
 
-    em.persist(aula1);
+        aulaDAO.salvar(aula2);
 
-    Aula aula2 = new Aula();
-    aula2.setTitulo("Aula 2 - Generics e Collections");
-    aula2.setDescricao("Nesta aula, vamos explorar os conceitos de Generics e Collections em Java.");
-    aula2.setDuracaoMinutos(45);
-    aula2.setOrdem(2);
-    aula2.setUrlVideo("https://www.example.com/java-avancado/aula2");
-    aula2.setCurso(curso);
+        // ==========================
+        // BUSCAS
+        // ==========================
 
-    em.persist(aula2);
+        List<Curso> cursos =
+                cursoDAO.buscarPorTitulo("Java");
 
-    // Confirmando a transação
-    em.getTransaction().commit();
-} catch (Exception e) {
-    // Em caso de erro, reverter a transação
-    em.getTransaction().rollback();
-    System.out.println("Erro ao persistir o curso e suas aulas: " + e.getMessage());
-}
+        System.out.println("\nCursos encontrados:");
 
-        em.close();
-        emf.close();
+        cursos.forEach(c ->
+                System.out.println(c.getTitulo()));
+
+        List<Aula> aulas =
+                aulaDAO.buscarPorOrdem(1);
+
+        System.out.println("\nAulas encontradas:");
+
+        aulas.forEach(a ->
+                System.out.println(a.getTitulo()));
+
+        // ==========================
+        // ATUALIZAÇÃO
+        // ==========================
+
+        curso.setPreco(299.90);
+        cursoDAO.atualizar(curso);
+
+        System.out.println("\nCurso atualizado!");
+
+        // ==========================
+        // REMOÇÃO
+        // ==========================
+
+        aulaDAO.remover(aula1.getId());
+        aulaDAO.remover(aula2.getId());
+
+        cursoDAO.remover(curso.getId());
+
+        instrutorDAO.remover(instrutor.getId());
+
+        System.out.println("\nDados removidos com sucesso!");
+
+        DBFactory.fechar();
     }
 }
